@@ -44,6 +44,11 @@ class BasketTests(unittest.TestCase):
     def test_new_customer(self):
         self.sarin_ostoskori.new_customer(self)
         
+    # test of new_customer method makes new customer and customer can use methods
+    def test_new_customer_methods(self):
+        self.sarin_ostoskori.new_customer(self)
+        self.asiakkaan_ostoskori.return_customer(self)
+        
     # test of count_discount_price method counts price
     def test_check_price(self):
         self.sarin_ostoskori.check_price("suklaakakku")
