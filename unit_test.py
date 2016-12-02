@@ -33,7 +33,7 @@ class BasketTests(unittest.TestCase):
 
     # test of delete_product method deletes a product
     def test_can_delete_product(self):
-        self.sarin_ostoskori.delete_product("koira", 20)
+        self.sarin_ostoskori.delete_product("minttu", 4)
         self.assertNotIn("Pasi", self.sarin_ostoskori.contents, "delete_product did not delete item")
 
     # test of count_discount_price method counts price
@@ -42,6 +42,7 @@ class BasketTests(unittest.TestCase):
 
     # test of new_customer method makes new customer
     def test_new_customer(self):
+        self.sarin_ostoskori.new_customer(self)
         
     # test of count_discount_price method counts price
     def test_check_price(self):
