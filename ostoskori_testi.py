@@ -5,6 +5,7 @@
 # You can count the new price if you have a discount
 
 # TODO: exception handling, user input...
+from collections import Counter
 
 class Basket:
     def __init__(self, customer, contents, price):
@@ -34,34 +35,25 @@ class Basket:
     def count_discount_price(self, percent):
         discount = percent / 100.0
         return self.price - self.price * discount
+    
+#tekemani muutokset
 
     def check_price(self, product):
         product_price = [["maito","banaani","hernekeitto","minttu","kahvi","suklaakakku"],[2.3,0.7,3.1,4,5.6,9.9]]
         i = product_price[0].index(product)
         return product_price[1][i]
 
-    def new_customer(self):
-        #user input:
-        cont = 'tyhja'
-        contents = list[]
-        product_prices = list[]
-        user = input("Asiakkaan nimi: ")
-        print('Anna 0 jos haluat lopettaa ostosten luettelun')
-        if(cont != '0'):
-            cont = input("Ostos: ")
-            contents.append(cont)
-            pric = input("Hinta: ")
-            product_prices.append(pric)
-            #check
-            if(len(contents)==len(product_prices)):
-                continue
-            else:
-                print("ostokset ja hinnat eiv‰t t‰sm‰‰")
-                new_customer():           
-        else:
-            print(user, contents, product_prices)
-            asiakkaan_ostoskori = Basket(user, contents, product_prices)
+    def new_name(self, user):
+        self.customer = user
+
+    def get_one_product_from_basket(self,number):
+        return self.contents[number]
+
+    def count_all_in_basket(self):
+        return len(self.contents)
+
+    def count_items_in_basket(self):
+        return Counter(self.contents)
 
 # Making a test object:
-jarin_ostoskori = Basket("Jari", ["maito","banaani","hernekeitto"], 7)
-sarin_ostoskori = Basket("Sari", ["minttu","kahvi","suklaakakku"], 18.5)
+sarin_ostoskori = Basket("Sari", ["minttu","suklaakakku","maito","maito","banaani","hernekeitto","banaani","banaani"], 23.7)

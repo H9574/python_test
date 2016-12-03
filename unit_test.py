@@ -7,7 +7,7 @@ class BasketTests(unittest.TestCase):
     # setup method to create objects
     def setUp(self):
         print("setting up")
-        self.sarin_ostoskori = Basket("Sari", ["minttu","kahvi","suklaakakku"], 18.5)
+        self.sarin_ostoskori = Basket("Sari", ["minttu","suklaakakku","maito","maito","banaani","hernekeitto","banaani","banaani"], 23.7)
     
     # tear down method
     def tearDown(self):
@@ -34,24 +34,56 @@ class BasketTests(unittest.TestCase):
     # test of delete_product method deletes a product
     def test_can_delete_product(self):
         self.sarin_ostoskori.delete_product("minttu", 4)
-        self.assertNotIn("Pasi", self.sarin_ostoskori.contents, "delete_product did not delete item")
+        self.assertNotIn("minttu", self.sarin_ostoskori.contents, "delete_product did not delete item")
 
     # test of count_discount_price method counts price
     def test_count_discount_price(self):
         self.sarin_ostoskori.count_discount_price(30.0)
 
-    # test of new_customer method makes new customer
+#laatimani testit
+        
+    # test return_price method returns right name
+    def test_return_customer(self):
+        self.assertEqual(self.sarin_ostoskori.return_customer(),"Sari")
+
+    # test return_price method returns right products
+    def test_return_contents(self):
+        self.assertEqual(self.sarin_ostoskori.return_contents(),["minttu","suklaakakku","maito","maito","banaani","hernekeitto","banaani","banaani"])
+
+    # test return_price method returns right price
+    def test_return_price(self):
+        self.assertEqual(self.sarin_ostoskori.return_price(),23.7)
+
+    # test basket price is right when compared to items
+    def test_items_and_prices(self):
+        product_number = 0
+        price = 0.0
+        while(product_number < self.sarin_ostoskori.count_all_in_basket()):
+            product = self.sarin_ostoskori.get_one_product_from_basket(product_number)
+            product_number = product_number+1
+            price = price + self.sarin_ostoskori.check_price(product)
+        self.assertEqual(self.sarin_ostoskori.return_price(),price)
+
+    # test of new_name method gives new name
     def test_new_customer(self):
-        self.sarin_ostoskori.new_customer(self)
+        self.sarin_ostoskori.new_name("Jari")
+        self.assertEqual(self.sarin_ostoskori.return_customer(),"Jari")
         
-    # test of new_customer method makes new customer and customer can use methods
-    def test_new_customer_methods(self):
-        self.sarin_ostoskori.new_customer(self)
-        self.asiakkaan_ostoskori.return_customer(self)
-        
-    # test of count_discount_price method counts price
+    # test of count_check_price method checks the price
     def test_check_price(self):
         self.sarin_ostoskori.check_price("suklaakakku")
+
+    # test of check_all_in_basket method to count items in basket
+    def test_count_all_in_basket(self):
+        self.sarin_ostoskori.count_all_in_basket()
+
+    # test of check_numbers_in_basket method to count items in basket
+    def test_count_items_in_basket(self):
+        self.sarin_ostoskori.count_items_in_basket()
+
+    # test of get_one_product_from_basket method checks one spesific item from basket
+    def test_get_one_product_from_basket(self):
+        self.sarin_ostoskori.get_one_product_from_basket(1)
 
 if __name__ == '__main__':
     unittest.main()
